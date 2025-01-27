@@ -20,7 +20,7 @@ const HELP_ITEMS = [
   },
 ];
 
-//Component
+//Component area
 function HelpArea() {
   return (
     <section data-testid="help-area" id="help-area">
