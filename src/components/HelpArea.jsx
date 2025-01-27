@@ -1,6 +1,7 @@
 import HelpBox from './HelpBox';
 import './HelpArea.css';
 
+// Items to be displayed
 const HELP_ITEMS = [
   {
     id: 'h1',
@@ -19,6 +20,7 @@ const HELP_ITEMS = [
   },
 ];
 
+//Component
 function HelpArea() {
   return (
     <section data-testid="help-area" id="help-area">
