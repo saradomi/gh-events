@@ -3,26 +3,21 @@ name: "workflow commands"
 on: [workflow_dispatch, push ]
 
 jobs:
-  first-job:
-    runs-on: ubuntu-latest
-    steps: 
-      - name: "Go"
-        run: |
-          echo "::group::My group message"
-          echo "Message 1"
-          echo "Message 2"
-          echo "::endgroup::"
-      - name: "Step 1"
-        run: echo "MY_VAL=hello there" >> $GITHUB_ENV
-      - name: "Step 2"
-        run: echo $MY_VAL
-  second-job:
+  context:
     runs-on: ubuntu-latest
     steps:
-      - name: My step
+      - name: Use some context
         run: |
           echo "Hello! $MY_ACTION"
           echo "Hello $MY_ACTOR"
         env:
           MY_ACTION: ${{ github.action }}
           MY_ACTOR: ${{ github.actor }}
+  default-env-variables:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Display some default variables
+        run: |
+          echo "Github action: $GITHUB_ACTION_REPOSITORY"
+          echo "Gihub repository owner: $GITHUB_REPOSITORY_OWNER"
+          echo "Debug: $RUNNER_NAME $RUNNER_DEBUG"
