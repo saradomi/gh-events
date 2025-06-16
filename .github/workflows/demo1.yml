@@ -26,7 +26,7 @@ jobs:
     steps:
       - name: Try custom action
         id: Hello
-        uses: saradomi/experimental-action@0.0.2
+        uses: saradomi/experimental-action@0.0.3
         with: 
           name: Nyx
       - name: Get the output
