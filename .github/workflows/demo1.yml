@@ -16,3 +16,12 @@ jobs:
         run: echo "MY_VAL=hello there" >> $GITHUB_ENV
       - name: "Step 2"
         run: echo $MY_VAL
+  second-job:
+    steps:
+      - name: My step
+        run: |
+          echo "Hello! $MY_ACTION"
+          echo "Hello $MY_ACTOR"
+        env:
+          MY_ACTION: ${{ github.action }}
+          MY_ACTOR: ${{ github.actor }}
