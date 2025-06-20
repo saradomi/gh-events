@@ -16,5 +16,4 @@ runs:
     - ${{ inputs.who_to_greet }}
   env:
     HELLO: World
-  post-entrypoint: echo "Clean up"
 
