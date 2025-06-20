@@ -1,58 +1,14 @@
-name: Deploy website
-on:
-  push:
-    branches:
-      - master
+name: Simple Action
+on: push
 jobs:
-  test:
+  simple-action:
     runs-on: ubuntu-latest
     steps:
-      - name: Get code
-        uses: actions/checkout@v3
-      - name: Cache dependencies
-        uses: actions/cache@v4
+      - uses: actions/checkout@v3
+      - name: Simple Docker action
+        id: greet
+        uses: ./.github/actions/hello-docker
         with:
-          path: ~/.npm
-          key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
-      - name: Install dependencies
-        run: npm ci
-      - name: Lint code
-        run: npm run lint
-      - name: Test code
-        run: npm run test
-  build:
-    needs: test
-    runs-on: ubuntu-latest
-    steps:
-      - name: Get code
-        uses: actions/checkout@v3
-      - name: Cache dependencies
-        uses: actions/cache@v4
-        with:
-          path: ~/.npm
-          key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
-      - name: Install dependencies
-        run: npm ci
-      - name: Build website
-        run: npm run build
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: dist-file
-          path: |
-            dist
-            package.json
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Get build artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: dist-file
-      - name: Output contents
-        run: ls
-      - name: Outpu filename
-        run: echo "${{ needs.build.outputs }}"
-      - name: Deploy
-        run: echo "Deploying..."
+          who-to-greet: Sara
+      - name: Log Greeting time
+        run: echo "Greeted at ${{ steps.greet.outputs.time}}"
