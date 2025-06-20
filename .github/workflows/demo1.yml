@@ -9,6 +9,6 @@ jobs:
         id: greet
         uses: ./.github/actions/hello-docker
         with:
-          who-to-greet: Sara
+          who_to_greet: Sara
       - name: Log Greeting time
         run: echo "Greeted at ${{ steps.greet.outputs.time}}"
